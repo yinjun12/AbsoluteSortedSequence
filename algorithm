@@ -1,0 +1,34 @@
+vector<vector<int>> GetAbsoluteSortedSequence(int n)
+//先排序，1：从最右边往左，找到第一个比右边小的数，记录位置；2：再从右边找到比它大的数中找到最小
+{//3：交换 4:交换后的数字进行排序
+	vector<vector<int>>result;//store arrange
+	vector<int>sol(n, 0);//every next arrange
+	for (int i = 0; i < n; i++)
+		sol[i] = i + 1;
+	result.push_back(sol);//the first sequence is ascending order sequence
+	
+	while (true)
+	{
+		bool flag = true;
+		int i = n - 1;
+		for (; i>=0; i--)
+		{
+			if (i != n - 1 && sol[i] < sol[i + 1])
+			{
+				flag = false;
+				break;
+			}
+		}//find the first number "a" that less than right firstly from rightmost
+		if (flag) break;
+		int j = n - 1, cnt = i + 1;
+		for (; j>i; j--)
+		{
+			if (sol[j] > sol[i] && sol[j] < sol[cnt])
+				cnt = j;
+		}//find a min number in the all number greater than "a"
+		swap(sol[i], sol[cnt]);//swap
+		sort(sol. begin() + i+1, sol.end());//sort the left arrange!
+		result.push_back(sol);
+	}
+	return result;
+}
