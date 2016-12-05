@@ -1,0 +1,28 @@
+bool ValidOrder(const vector<int>&v, const vector<int>&vec, int total)//判断向量对应的子集的和是否等于total
+{
+	int sum = 0;
+	for (int i = 0; i < v.size(); i++)
+	{
+		if (v[i] == 1)
+			sum = sum + vec[i];
+	}
+	return sum == total;
+}
+int main
+{
+vector<int>vec{ 10, 20, 30, 40, 50, 60 };
+	vector<int>v(vec.size());
+	for (int i = v.size()-1; i>=0 ; i--)
+	{
+	fill(v.begin(), v.begin() + i, 0);
+	fill(v.begin() + i, v.end(), 1);
+	do
+	{
+	if (ValidOrder(v, vec, 60))
+	{
+	for_each(v.begin(), v.end(), [](int i){cout << i << " "; });
+	cout << endl;
+	}
+	} while (next_permutation(v.begin(), v.end()));
+	}
+}
